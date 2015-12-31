@@ -2,6 +2,8 @@
   "name": "bluemix-client",
   "version": "0.0.1",
   "description": "Client for Bluemix CloudFoundry API and Container API. Initial idea based on https://www.npmjs.com/package/cf-nodejs-client (that is full featured), this is under construction",
+  "author": "David Ayala <davixyz@gmail.com> (http://davidayala.eu)",
+  "main": "index.js",
   "dependencies": {
     "bluebird": "^3.1.1",
     "request": "2.65.0"

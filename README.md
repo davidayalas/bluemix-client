@@ -1,6 +1,12 @@
 # Bluemix client
 
-The client idea is based in [cf-nodejs-client](https://www.npmjs.com/package/cf-nodejs-client) but I don't need some parts and I wanted to play a little with Bliemix API and Nodejs.
+The client idea is based in [cf-nodejs-client](https://www.npmjs.com/package/cf-nodejs-client) but I don't need some parts and I wanted to play a little with Bluemix API and Node.js.
+
+Also, I need access to Container API and the cf client doesn't provide it, for now.
+
+# Install
+
+		npm install bluemix-client --save
 
 # Basic usage
 
