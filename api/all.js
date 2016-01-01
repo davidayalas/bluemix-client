@@ -1,4 +1,4 @@
-var commons = require("./commons")
+var commons = require("../utils/commons")
 
 function all(context){
 	this.ctx = context;

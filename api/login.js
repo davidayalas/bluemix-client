@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var http = require("./http")
+var http = require("../utils/http")
 
 /**
  * Login into Bluemix API

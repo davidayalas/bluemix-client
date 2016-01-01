@@ -2,10 +2,37 @@
   "name": "bluemix-client",
   "version": "0.0.1",
   "description": "Client for Bluemix CloudFoundry API and Container API. Initial idea based on https://www.npmjs.com/package/cf-nodejs-client (that is full featured), this is under construction",
-  "author": "David Ayala <davixyz@gmail.com> (http://davidayala.eu)",
+  "author": {
+    "name": "David Ayala",
+    "email": "davixyz@gmail.com",
+    "url": "http://davidayala.eu"
+  },
   "main": "index.js",
   "dependencies": {
     "bluebird": "^3.1.1",
     "request": "2.65.0"
-  }
+  },
+  "gitHead": "6d6e31e727b4531796c9d9b264bc42938b25cb7d",
+  "_id": "bluemix-client@0.0.1",
+  "scripts": {},
+  "_shasum": "7ae01f01c4aaf06b184b78422c7ba13751733fc1",
+  "_from": "bluemix-client@*",
+  "_npmVersion": "2.14.7",
+  "_nodeVersion": "4.2.3",
+  "_npmUser": {
+    "name": "davidayalas",
+    "email": "davixyz@gmail.com"
+  },
+  "dist": {
+    "shasum": "7ae01f01c4aaf06b184b78422c7ba13751733fc1",
+    "tarball": "http://registry.npmjs.org/bluemix-client/-/bluemix-client-0.0.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "davidayalas",
+      "email": "davixyz@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/bluemix-client/-/bluemix-client-0.0.1.tgz"
 }

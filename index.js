@@ -129,18 +129,18 @@ Bluemix.prototype.http = require("./utils/http")
 /**
  * Exposes login function from module
  */
-Bluemix.prototype.login = require("./utils/login").login;
+Bluemix.prototype.login = require("./api/login").login;
 
 /**
  * Exposes getInfo function from module
  */
-Bluemix.prototype.getInfo = require("./utils/login").getInfo;
+Bluemix.prototype.getInfo = require("./api/login").getInfo;
 
 /**
  * Exposes .spaces() function to bind spaces functionality
  */
 Bluemix.prototype.spaces = function(){
-	var spaces = require("./cf/spaces");
+	var spaces = require("./api/spaces");
 	spaces = new spaces(this);
 	return spaces;
 }
@@ -149,7 +149,7 @@ Bluemix.prototype.spaces = function(){
  * Exposes .spaces() function to bind spaces functionality
  */
 Bluemix.prototype.services = function(){
-	var services = require("./cf/services");
+	var services = require("./api/services");
 	services = new services(this);
 	return services;
 }
@@ -158,7 +158,7 @@ Bluemix.prototype.services = function(){
  * Exposes .apps() function to bind apps functionality
  */
 Bluemix.prototype.apps = function(){
-	var services = require("./cf/apps");
+	var services = require("./api/apps");
 	services = new services(this);
 	return services;
 }
@@ -167,7 +167,7 @@ Bluemix.prototype.apps = function(){
  * Exposes .containers() function to bind containers functionality
  */
 Bluemix.prototype.containers = function(){
-	var services = require("./docker/containers");
+	var services = require("./api/containers");
 	services = new services(this);
 	return services;
 }
@@ -176,7 +176,7 @@ Bluemix.prototype.containers = function(){
  * Exposes .all() function to bind general functionality
  */
 Bluemix.prototype.all = function(){
-	var all = require("./utils/getall");
+	var all = require("./api/all");
 	all = new all(this);
 	return all;
 }
@@ -185,7 +185,7 @@ Bluemix.prototype.all = function(){
  * Exposes .logs() function to bind logs functionality
  */
 Bluemix.prototype.logs = function(){
-	var logs = require("./utils/logs");
+	var logs = require("./api/logs");
 	logs = new logs(this);
 	return logs;
 }
