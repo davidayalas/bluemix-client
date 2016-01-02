@@ -173,6 +173,7 @@ function getUrl(url, that, resolve, reject, options, extra_headers){
 
 	.then(
 		function(spaces){
+			console.log(spaces)
 			var c_opt = options;
 			c_opt.space = searchSpace(spaces, c_opt.space);
 			return c_opt;

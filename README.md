@@ -72,10 +72,21 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 	* .get({region, space, params})
 
+* .volumes()
+
+	* .get({region, space})
+
 * .logs()
 
 	* .apps({region, space, app})
 	* .containers({region, space, container})
+
+* .events()
+
+	* .apps({region, type})
+	* .services({region, type})
+
+	type = create | delete | update
 
 * .all()
 

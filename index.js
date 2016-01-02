@@ -137,7 +137,7 @@ Bluemix.prototype.login = require("./api/login").login;
 Bluemix.prototype.getInfo = require("./api/login").getInfo;
 
 /**
- * Exposes .spaces() function to bind spaces functionality
+ * Exposes .spaces() method to bind spaces functionality
  */
 Bluemix.prototype.spaces = function(){
 	var spaces = require("./api/spaces");
@@ -146,7 +146,7 @@ Bluemix.prototype.spaces = function(){
 }
 
 /**
- * Exposes .spaces() function to bind spaces functionality
+ * Exposes .spaces() method to bind spaces functionality
  */
 Bluemix.prototype.services = function(){
 	var services = require("./api/services");
@@ -155,7 +155,7 @@ Bluemix.prototype.services = function(){
 }
 
 /**
- * Exposes .apps() function to bind apps functionality
+ * Exposes .apps() method to bind apps functionality
  */
 Bluemix.prototype.apps = function(){
 	var services = require("./api/apps");
@@ -164,16 +164,16 @@ Bluemix.prototype.apps = function(){
 }
 
 /**
- * Exposes .containers() function to bind containers functionality
+ * Exposes .containers() method to bind containers functionality
  */
 Bluemix.prototype.containers = function(){
-	var services = require("./api/containers");
-	services = new services(this);
-	return services;
+	var containers = require("./api/containers");
+	containers = new containers(this);
+	return containers;
 }
 
 /**
- * Exposes .all() function to bind general functionality
+ * Exposes .all() method to bind general functionality
  */
 Bluemix.prototype.all = function(){
 	var all = require("./api/all");
@@ -182,12 +182,30 @@ Bluemix.prototype.all = function(){
 }
 
 /**
- * Exposes .logs() function to bind logs functionality
+ * Exposes .logs() method to bind logs functionality
  */
 Bluemix.prototype.logs = function(){
 	var logs = require("./api/logs");
 	logs = new logs(this);
 	return logs;
+}
+
+/**
+ * Exposes .events() method to bind events functionality
+ */
+Bluemix.prototype.events = function(){
+	var events = require("./api/events");
+	events = new events(this);
+	return events;
+}
+
+/**
+ * Exposes .volumes() method to bind events functionality
+ */
+Bluemix.prototype.volumes = function(){
+	var volumes = require("./api/volumes");
+	volumes = new volumes(this);
+	return volumes;
 }
 
 module.exports.Bluemix = Bluemix;
