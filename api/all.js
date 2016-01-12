@@ -8,7 +8,7 @@ function get(that, resolve, reject, options){
 	var results = {};
 	var space = options.space || null;
 
-	that.ctx.spaces().get(options)
+	that.ctx.spaces().getAll(options)
 	.then(
 		function(data){
 			if(data.resources.length===0){
@@ -31,7 +31,7 @@ function get(that, resolve, reject, options){
 			}
 
 			var spContainers = function(opt, name){
-				that.ctx.containers().get(opt).then(
+				that.ctx.containers().getAll(opt).then(
 				  	function(cont){
 						results[name].containers = cont;
 						countContainers--;
@@ -46,7 +46,7 @@ function get(that, resolve, reject, options){
 			}
 
 			var spApps = function(opt, name){
-				that.ctx.apps().get(opt).then(
+				that.ctx.apps().getAll(opt).then(
 				  	function(apps){
 						results[name].apps = apps.resources;
 						countApps--;
@@ -61,7 +61,7 @@ function get(that, resolve, reject, options){
 			}
 
 			var spServices = function(opt, name){
-				that.ctx.services().get(opt).then(
+				that.ctx.services().getAll(opt).then(
 				  	function(services){
 						results[name].services = services.resources;
 						countServices--;

@@ -33,7 +33,7 @@ exports.login = function(username, password) {
                 }
             };
         
-            http.post(options)
+            http.request(options)
 
             .then(
                 function(data){
@@ -61,7 +61,7 @@ exports.getInfo = function(){
     var endpoint = this.getEndpoint(); 
     var that = this;
     return new Promise(function (resolve, reject){
-        http.get(endpoint + "/v2/info")
+        http.request({url : endpoint + "/v2/info"})
             .then(function(data){
                 that.info = JSON.parse(data);
                 that.logs_endpoint = that.info.logging_endpoint.replace("wss","https").replace(":443","").replace("\.ng\.",".{{region}}."); 

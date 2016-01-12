@@ -14,32 +14,30 @@ function apps(context){
  * @param  {Object} options [options.region, options.space]
  * @return {JSON}
  */
-apps.prototype.get = function(options){
+apps.prototype.getAll = function(options){
 	var that = this;
+	var fn = function(that, resolve, reject, options){
+		commons.getUrl(that.ctx.getEndpoint(options.region)+"/v2/spaces/{{space}}/apps", that, resolve, reject, options)
+	}
     return new Promise(function (resolve, reject) {
-		commons.getData(that, resolve, reject, get, options)
+		return commons.getData(that, resolve, reject, fn, options)
 	});
 }	
 
-function get(that, resolve, reject, options){
-	commons.getUrl(that.ctx.getEndpoint(options.region)+"/v2/spaces/{{space}}/apps", that, resolve, reject, options)
-}
 
 /**
  * Get App Summary
  * @param  {Object} options [options.region, options.space, options.app]
  * @return {JSON}
  */
-apps.prototype.getApp = function(options){
+apps.prototype.get = function(options){
 	var that = this;
+	var fn = function(that, resolve, reject, options){
+		commons.getUrl(that.ctx.getEndpoint(options.region)+"/v2/apps/{{app}}/summary", that, resolve, reject, options)
+	}
     return new Promise(function (resolve, reject) {
-		commons.getData(that, resolve, reject, getApp, options)
+		commons.getData(that, resolve, reject, fn, options)
 	});
 }	
-
-function getApp(that, resolve, reject, options){
-	commons.getUrl(that.ctx.getEndpoint(options.region)+"/v2/apps/{{app}}/summary", that, resolve, reject, options)
-}
-
 
 module.exports = apps;

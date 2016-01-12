@@ -53,28 +53,47 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 * If you implement a REST API with this client, you can forget about refresh token when it expires: the client does it automatically
 
-# GET methods
+# Methods
+
+* .organizations()
+
+	* .getAll({region})
 
 * .spaces()
 
-	* .get({region, params})
+	* .getAll({region, params})
+	* .create({region, form : {organization_guid, name}})
+	* .delete({region, guid})
 
 * .apps()
 
-	* .get({region, space, params})
-	* .getApp({region, space, app, params})
+	* .getAll({region, space, params})
+	* .get({region, space, app, params})
 
 * .services()
 
-	* .get({region, space, params})
+	* .getAll({region, space, params})
 
 * .containers()
 
-	* .get({region, space, params})
+	* .getAll({region, space})
+	* .get({region, space, container})
+	* .start({container, region, guid}) //guid = space guid
+	* .stop({container, region, guid})
+	* .pause({container, region, guid})
+	* .unpause({container, region, guid})
+	* .restart({container, region, guid})
+	* .delete({container, region, guid})
+
+
+* .groups()
+
+	* .getAll({region, space})
+	* .get({region, space, group})
 
 * .volumes()
 
-	* .get({region, space})
+	* .getAll({region, space})
 
 * .logs()
 
@@ -93,4 +112,6 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
     * .get({region, space}) : all services, apps and containers for a space
     * .get({region}) : all services, apps and containers for all spaces
 
-# TODO: post, put, delete
+
+
+# TODO: implement more services and methods

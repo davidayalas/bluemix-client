@@ -172,6 +172,16 @@ Bluemix.prototype.containers = function(){
 	return containers;
 }
 
+
+/**
+ * Exposes .groups() method to bind groups containers functionality
+ */
+Bluemix.prototype.groups = function(){
+	var groups = require("./api/containers-group");
+	groups = new groups(this);
+	return groups;
+}
+
 /**
  * Exposes .all() method to bind general functionality
  */
@@ -206,6 +216,15 @@ Bluemix.prototype.volumes = function(){
 	var volumes = require("./api/volumes");
 	volumes = new volumes(this);
 	return volumes;
+}
+
+/**
+ * Exposes .organizations() method to bind events functionality
+ */
+Bluemix.prototype.organizations = function(){
+	var organizations = require("./api/organizations");
+	organizations = new organizations(this);
+	return organizations;
 }
 
 module.exports.Bluemix = Bluemix;

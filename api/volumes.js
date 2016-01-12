@@ -5,7 +5,7 @@ function volumes(context){
 	this.ctx = context;
 }
 
-volumes.prototype.get = function(options){
+volumes.prototype.getAll = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
 		commons.getUrl(that.ctx.getContainersEndpoint(options.region) + "/volumes/json", that, resolve, reject, options,{"X-Auth-Project-Id": "guid", "Accept": "application/json"});

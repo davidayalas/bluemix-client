@@ -5,10 +5,24 @@ function logs(context){
 	this.ctx = context;
 }
 
+function cleanLog(data) {
+    data = data.split('\n\n');
+    var start;
+    var end;
+    for (i = 0; i < data.length; i++) {
+        end = data[i].indexOf(String.fromCharCode(16));
+        //start = data[i].slice(0,2)=="--"?0:2;
+        data[i] = data[i].slice(2, end);
+    }
+    return data.join('\n');
+};
+
+
 /*
 * Apps Logs
 */
 function appget(that, resolve, reject, options){	
+	options.apply_fn = cleanLog;
 	commons.getUrl(that.ctx.getLogsEndpoint(options.region) + "/recent?app={{app}}", that, resolve, reject, options)
 }
 

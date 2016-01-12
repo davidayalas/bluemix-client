@@ -1,28 +1,6 @@
 var http = require("../utils/http")
 
 /**
- * Executes a function before check if TTL is expired or not. If expired it will do login againg with user and password from bluemix object ("that")
- * @param  {Object} that   [Bluemix instance]
- * @param  {Function} resolve 
- * @param  {Function} reject 
- * @param  {Function} fn   [function to execute] 
- * @return {JSON or text}
- */
-function getData(that, resolve, reject, fn, options){
-	if(new Date()>=that.ctx.getTokenTTL()){
-		console.info("refreshing login")
-		that.ctx.login(that.ctx.getUser(), that.ctx.getPassword())
-		.then(
-			function(){
-				fn(that, resolve, reject, options)
-			}
-		)
-	}else{
-		fn(that, resolve, reject, options)
-	}
-}
-
-/**
  * Search space name in spaces and returns its guid
  * @param  {Object} spaces
  * @param  {String} string 
@@ -106,7 +84,7 @@ function cleanResults(json){
 		delete json.resources[i].entity.events_url;
 		delete json.resources[i].entity.environment_json;
 
-		delete json.resources[i].entity.organization_guid;
+		//delete json.resources[i].entity.organization_guid;
 		delete json.resources[i].entity.space_quota_definition_guid;
 		delete json.resources[i].entity.allow_ssh;
 		delete json.resources[i].entity.organization_url;
@@ -157,6 +135,28 @@ function replaceVariablesInURL(url, options){
 }
 
 /**
+ * Executes a function before check if TTL is expired or not. If expired it will do login againg with user and password from bluemix object ("that")
+ * @param  {Object} that   [Bluemix instance]
+ * @param  {Function} resolve 
+ * @param  {Function} reject 
+ * @param  {Function} fn   [function to execute] 
+ * @return {JSON or text}
+ */
+function getData(that, resolve, reject, fn, options){
+	if(new Date()>=that.ctx.getTokenTTL()){
+		console.info("refreshing login")
+		that.ctx.login(that.ctx.getUser(), that.ctx.getPassword())
+		.then(
+			function(){
+				fn(that, resolve, reject, options)
+			}
+		)
+	}else{
+		fn(that, resolve, reject, options)
+	}
+}
+
+/**
  * Wrapper function to make generic the "GET" of url from Bluemix API
  * @param  {String} url 
  * @param  {Object} that   [Bluemix instance]
@@ -169,11 +169,10 @@ function replaceVariablesInURL(url, options){
 function getUrl(url, that, resolve, reject, options, extra_headers){
 	var results = [];
 
-	that.ctx.spaces().get(options)
+	that.ctx.spaces().getAll(options)
 
 	.then(
 		function(spaces){
-			console.log(spaces)
 			var c_opt = options;
 			c_opt.space = searchSpace(spaces, c_opt.space);
 			return c_opt;
@@ -194,7 +193,7 @@ function getUrl(url, that, resolve, reject, options, extra_headers){
 				querystring = "?" + querify(c_opt.params);
 			}
 
-			http.getWithAuth(replaceVariablesInURL(url, c_opt) + querystring, that.ctx.getTokenType(),that.ctx.getToken(), extra_headers)
+			http.requestWithAuth(replaceVariablesInURL(url, c_opt) + querystring, that.ctx.getTokenType(),that.ctx.getToken(), extra_headers)
 			
 			.then(function(results){
 				try{
@@ -206,6 +205,9 @@ function getUrl(url, that, resolve, reject, options, extra_headers){
 					}
 				}catch(e){
 					//... TODO: improve try/catch passing options.json true|false 
+				}
+				if(options.apply_fn){
+					results = options.apply_fn(results);
 				}
 				resolve(results);
 			})

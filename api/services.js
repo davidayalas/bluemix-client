@@ -5,17 +5,16 @@ function services(context){
 	this.ctx = context;
 }
 
-function get(that, resolve, reject, options){
-	commons.getUrl(that.ctx.getEndpoint(options.region) + "/v2/spaces/{{space}}/service_instances", that, resolve, reject, options)
-}
-
 /* 
 * Get Space Services 
 */
-services.prototype.get = function(options){
+services.prototype.getAll = function(options){
 	var that = this;
+	var fn = function(that, resolve, reject, options){
+		commons.getUrl(that.ctx.getEndpoint(options.region) + "/v2/spaces/{{space}}/service_instances", that, resolve, reject, options)
+	}
     return new Promise(function (resolve, reject) {
-		commons.getData(that, resolve, reject, get, options)
+		commons.getData(that, resolve, reject, fn, options)
 	});
 }	
 
