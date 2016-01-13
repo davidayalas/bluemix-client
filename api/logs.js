@@ -1,8 +1,8 @@
 var http = require("../utils/http")
 var commons = require("../utils/commons")
 
-function logs(context){
-	this.ctx = context;
+function logs(context) {
+    this.ctx = context;
 }
 
 function cleanLog(data) {
@@ -19,48 +19,51 @@ function cleanLog(data) {
 
 
 /*
-* Apps Logs
-*/
-function appget(that, resolve, reject, options){	
-	options.apply_fn = cleanLog;
-	commons.getUrl(that.ctx.getLogsEndpoint(options.region) + "/recent?app={{app}}", that, resolve, reject, options)
+ * Apps Logs
+ */
+function appget(that, resolve, reject, options) {
+    options.apply_fn = cleanLog;
+    commons.getUrl(that.ctx.getLogsEndpoint(options.region) + "/recent?app={{app}}", that, resolve, reject, options)
 }
 
-function apps(context){
-	this.ctx = context;	
+function apps(context) {
+    this.ctx = context;
 }
 
-logs.prototype.apps = function(){
-	return new apps(this.ctx);
+logs.prototype.apps = function() {
+    return new apps(this.ctx);
 }
 
-apps.prototype.get = function(options){
-	var that = this;
-    return new Promise(function (resolve, reject) {
-		commons.getData(that, resolve, reject, appget, options)
-	});
+apps.prototype.get = function(options) {
+    var that = this;
+    return new Promise(function(resolve, reject) {
+        commons.getData(that, resolve, reject, appget, options)
+    });
 }
 
 /*
-* Container Logs
-*/
-function containerget(that, resolve, reject, options){
-	commons.getUrl(that.ctx.getContainersEndpoint(options.region) + "/containers/{{container}}/logs", that, resolve, reject, options, {"X-Auth-Project-Id": "guid", "Accept": "application/json"})
+ * Container Logs
+ */
+function containerget(that, resolve, reject, options) {
+    commons.getUrl(that.ctx.getContainersEndpoint(options.region) + "/containers/{{container}}/logs", that, resolve, reject, options, {
+        "X-Auth-Project-Id": "guid",
+        "Accept": "application/json"
+    })
 }
 
-function containers(context){
-	this.ctx = context;	
+function containers(context) {
+    this.ctx = context;
 }
 
-logs.prototype.containers = function(){
-	return new containers(this.ctx);
+logs.prototype.containers = function() {
+    return new containers(this.ctx);
 }
 
-containers.prototype.get = function(space){
-	var that = this;
-    return new Promise(function (resolve, reject) {
-		commons.getData(that, resolve, reject, containerget, space)
-	});
+containers.prototype.get = function(space) {
+    var that = this;
+    return new Promise(function(resolve, reject) {
+        commons.getData(that, resolve, reject, containerget, space)
+    });
 }
 
 module.exports = logs;

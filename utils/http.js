@@ -1,9 +1,9 @@
 var request = require('request');
 
 exports.request = function(options) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         try {
-            request(options, function (error, response, body) {
+            request(options, function(error, response, body) {
                 if (error) {
                     return reject(error);
                 }
@@ -16,10 +16,10 @@ exports.request = function(options) {
     });
 };
 
-exports.requestWithAuth = function(url, token_type, access_token, extra_headers, form, method){
+exports.requestWithAuth = function(url, token_type, access_token, extra_headers, form, method) {
     var that = this;
 
-    if(!method){
+    if (!method) {
         method = "GET";
     }
 
@@ -32,14 +32,14 @@ exports.requestWithAuth = function(url, token_type, access_token, extra_headers,
         }
     };
 
-    if(form!==null && form!==undefined && form!=="undefined"){
+    if (form !== null && form !== undefined && form !== "undefined") {
         options.form = JSON.stringify(form);
         options.headers["Content-Type"] = "application/x-www-form-urlencoded";
         //options.headers["Content-Type"] = "application/json";
     }
 
-    if(extra_headers){
-        for(var k in extra_headers){
+    if (extra_headers) {
+        for (var k in extra_headers) {
             options.headers[k] = extra_headers[k];
         }
     }

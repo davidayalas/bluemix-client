@@ -5,15 +5,15 @@ var Promise = require('bluebird');
  * @constructor
  */
 function Bluemix(options) {
-	this.username = "";
-	this.password = "" ;
-	this.endpoint = "https://api.{{region}}.bluemix.net";
-	this.containers_endpoint = "https://containers-api.{{region}}.bluemix.net/v3",
-	this.logs_endpoint = "",
-	this.default_region = "ng";
-	this.info = {};
-	this.auth = {};
-	this.auth.token_ttl = 0;
+    this.username = "";
+    this.password = "";
+    this.endpoint = "https://api.{{region}}.bluemix.net";
+    this.containers_endpoint = "https://containers-api.{{region}}.bluemix.net/v3",
+    this.logs_endpoint = "",
+    this.default_region = "ng";
+    this.info = {};
+    this.auth = {};
+    this.auth.token_ttl = 0;
 }
 
 /**
@@ -21,11 +21,11 @@ function Bluemix(options) {
  * @param {String} region
  * @return {String}
  */
-Bluemix.prototype.getEndpoint = function(region){
-	if(!region){
-		region = this.default_region;
-	}
-	return this.endpoint.replace("{{region}}", region);
+Bluemix.prototype.getEndpoint = function(region) {
+    if (!region) {
+        region = this.default_region;
+    }
+    return this.endpoint.replace("{{region}}", region);
 }
 
 /**
@@ -33,11 +33,11 @@ Bluemix.prototype.getEndpoint = function(region){
  * @param {String} region
  * @return {String}
  */
-Bluemix.prototype.getContainersEndpoint = function(region){
-	if(!region){
-		region = this.default_region;
-	}
-	return this.containers_endpoint.replace("{{region}}", region);
+Bluemix.prototype.getContainersEndpoint = function(region) {
+    if (!region) {
+        region = this.default_region;
+    }
+    return this.containers_endpoint.replace("{{region}}", region);
 }
 
 /**
@@ -45,80 +45,80 @@ Bluemix.prototype.getContainersEndpoint = function(region){
  * @param {String} region
  * @return {String}
  */
-Bluemix.prototype.getLogsEndpoint = function(region){
-	if(!region){
-		region = this.default_region;
-	}
-	return this.logs_endpoint.replace("{{region}}", region);
+Bluemix.prototype.getLogsEndpoint = function(region) {
+    if (!region) {
+        region = this.default_region;
+    }
+    return this.logs_endpoint.replace("{{region}}", region);
 }
 
 /**
  * Set bluemix containers endpoint
  * @param {String} region
  */
-Bluemix.prototype.setUser = function(user){
-	this.username = user;
+Bluemix.prototype.setUser = function(user) {
+    this.username = user;
 }
 
 /**
  * Get bluemix logged user
  * @return {String}
  */
-Bluemix.prototype.getUser = function(){
-	return this.username;
+Bluemix.prototype.getUser = function() {
+    return this.username;
 }
 
 /**
  * Set bluemix passworn
  * @param {String} pass
  */
-Bluemix.prototype.setPassword = function(pass){
-	this.password = pass;
+Bluemix.prototype.setPassword = function(pass) {
+    this.password = pass;
 }
 
 /**
  * Get bluemix logged password
  * @return {String}
  */
-Bluemix.prototype.getPassword = function(){
-	return this.password;
+Bluemix.prototype.getPassword = function() {
+    return this.password;
 }
 
 /**
  * Get bluemix token
  * @return {String}
  */
-Bluemix.prototype.getToken = function(){
-	return this.auth.access_token;
+Bluemix.prototype.getToken = function() {
+    return this.auth.access_token;
 }
 
 /**
  * Get bluemix tokentype
  * @return {String}
  */
-Bluemix.prototype.getTokenType = function(){
-	return this.auth.token_type;
+Bluemix.prototype.getTokenType = function() {
+    return this.auth.token_type;
 }
 
 /**
  * Get bluemix token TTL
  * @return {Integer}
  */
-Bluemix.prototype.getTokenTTL = function(){
-	return this.auth.token_ttl;
+Bluemix.prototype.getTokenTTL = function() {
+    return this.auth.token_ttl;
 }
 
 /**
  * Set bluemix token TTL. From auth info getted in login sets new TTL to relogin when necessary. It does one hour before expires
  */
-Bluemix.prototype.setTokenTTL = function(){
-	var now = new Date();
-	var seconds_before = 0;
-	if(this.auth.expires_in>3600){
-		seconds_before = 3600;
-	}
-	now.setSeconds(now.getSeconds() + (this.auth.expires_in-seconds_before));	
-	this.auth.token_ttl = now.getTime();
+Bluemix.prototype.setTokenTTL = function() {
+    var now = new Date();
+    var seconds_before = 0;
+    if (this.auth.expires_in > 3600) {
+        seconds_before = 3600;
+    }
+    now.setSeconds(now.getSeconds() + (this.auth.expires_in - seconds_before));
+    this.auth.token_ttl = now.getTime();
 }
 
 /**
@@ -139,92 +139,92 @@ Bluemix.prototype.getInfo = require("./api/login").getInfo;
 /**
  * Exposes .spaces() method to bind spaces functionality
  */
-Bluemix.prototype.spaces = function(){
-	var spaces = require("./api/spaces");
-	spaces = new spaces(this);
-	return spaces;
+Bluemix.prototype.spaces = function() {
+    var spaces = require("./api/spaces");
+    spaces = new spaces(this);
+    return spaces;
 }
 
 /**
  * Exposes .spaces() method to bind spaces functionality
  */
-Bluemix.prototype.services = function(){
-	var services = require("./api/services");
-	services = new services(this);
-	return services;
+Bluemix.prototype.services = function() {
+    var services = require("./api/services");
+    services = new services(this);
+    return services;
 }
 
 /**
  * Exposes .apps() method to bind apps functionality
  */
-Bluemix.prototype.apps = function(){
-	var services = require("./api/apps");
-	services = new services(this);
-	return services;
+Bluemix.prototype.apps = function() {
+    var services = require("./api/apps");
+    services = new services(this);
+    return services;
 }
 
 /**
  * Exposes .containers() method to bind containers functionality
  */
-Bluemix.prototype.containers = function(){
-	var containers = require("./api/containers");
-	containers = new containers(this);
-	return containers;
+Bluemix.prototype.containers = function() {
+    var containers = require("./api/containers");
+    containers = new containers(this);
+    return containers;
 }
 
 
 /**
  * Exposes .groups() method to bind groups containers functionality
  */
-Bluemix.prototype.groups = function(){
-	var groups = require("./api/containers-group");
-	groups = new groups(this);
-	return groups;
+Bluemix.prototype.groups = function() {
+    var groups = require("./api/containers-group");
+    groups = new groups(this);
+    return groups;
 }
 
 /**
  * Exposes .all() method to bind general functionality
  */
-Bluemix.prototype.all = function(){
-	var all = require("./api/all");
-	all = new all(this);
-	return all;
+Bluemix.prototype.all = function() {
+    var all = require("./api/all");
+    all = new all(this);
+    return all;
 }
 
 /**
  * Exposes .logs() method to bind logs functionality
  */
-Bluemix.prototype.logs = function(){
-	var logs = require("./api/logs");
-	logs = new logs(this);
-	return logs;
+Bluemix.prototype.logs = function() {
+    var logs = require("./api/logs");
+    logs = new logs(this);
+    return logs;
 }
 
 /**
  * Exposes .events() method to bind events functionality
  */
-Bluemix.prototype.events = function(){
-	var events = require("./api/events");
-	events = new events(this);
-	return events;
+Bluemix.prototype.events = function() {
+    var events = require("./api/events");
+    events = new events(this);
+    return events;
 }
 
 /**
  * Exposes .volumes() method to bind events functionality
  */
-Bluemix.prototype.volumes = function(){
-	var volumes = require("./api/volumes");
-	volumes = new volumes(this);
-	return volumes;
+Bluemix.prototype.volumes = function() {
+    var volumes = require("./api/volumes");
+    volumes = new volumes(this);
+    return volumes;
 }
 
 /**
  * Exposes .organizations() method to bind events functionality
  */
-Bluemix.prototype.organizations = function(){
-	var organizations = require("./api/organizations");
-	organizations = new organizations(this);
-	return organizations;
+Bluemix.prototype.organizations = function() {
+    var organizations = require("./api/organizations");
+    organizations = new organizations(this);
+    return organizations;
 }
 
 module.exports.Bluemix = Bluemix;
