@@ -90,7 +90,8 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 	* .getAll({region, space})
 	* .get({region, space, group})
-	* .update({NumberInstances: {Desired, Min, Max}, Autorecovery}) http://ccsapi-doc.mybluemix.net/#!/Container_Groups/patch_containers_groups_name_or_id
+	* .update({region, space, group, form: NumberInstances: {Desired, Min, Max}, Autorecovery}) 
+		- http://ccsapi-doc.mybluemix.net/#!/Container_Groups/patch_containers_groups_name_or_id
 
 * .volumes()
 
