@@ -31,4 +31,18 @@ containersGroup.prototype.get = function(options){
 	});
 }	
 
+/* 
+* PATH Update Group
+*/
+containersGroup.prototype.update = function(options){
+	var that = this;
+	var fn = function(that, resolve, reject, options){
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/groups/"+options.group, that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "PATCH", resolve, reject)
+	}
+    return new Promise(function (resolve, reject) {
+		commons.getData(that, resolve, reject, fn, options)
+	});
+}	
+
+
 module.exports = containersGroup;

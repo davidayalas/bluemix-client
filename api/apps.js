@@ -20,7 +20,7 @@ apps.prototype.getAll = function(options){
 		commons.getUrl(that.ctx.getEndpoint(options.region)+"/v2/spaces/{{space}}/apps", that, resolve, reject, options)
 	}
     return new Promise(function (resolve, reject) {
-		return commons.getData(that, resolve, reject, fn, options)
+		commons.getData(that, resolve, reject, fn, options)
 	});
 }	
 

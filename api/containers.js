@@ -38,17 +38,7 @@ containers.prototype.get = function(options){
 containers.prototype.start = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.postWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/start", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "POST")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/start", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "POST", resolve, reject)
 	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)
@@ -61,17 +51,7 @@ containers.prototype.start = function(options){
 containers.prototype.stop = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.postWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "POST")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "POST", resolve, reject)
 	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)
@@ -84,17 +64,7 @@ containers.prototype.stop = function(options){
 containers.prototype.restart = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.postWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "POST")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/restart", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "POST", resolve, reject)
 	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)
@@ -107,17 +77,7 @@ containers.prototype.restart = function(options){
 containers.prototype.pause = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.postWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "POST")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/pause", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "POST", resolve, reject)
 	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)
@@ -130,17 +90,8 @@ containers.prototype.pause = function(options){
 containers.prototype.unpause = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.postWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "POST")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)	}
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/unpause", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "POST", resolve, reject)
+	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)
 	});
@@ -152,17 +103,7 @@ containers.prototype.unpause = function(options){
 containers.prototype.delete = function(options){
 	var that = this;
 	var fn = function(that, resolve, reject, options){
-		http.deleteWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"?force=1", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options.form, "DELETE")
-		.then(
-			function(status){
-				resolve(status)
-			}
-		)
-		.catch(
-			function(error){
-				reject(error)
-			}
-		)
+		commons.requestWrapper(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"?force=1", that.ctx.auth.token_type, that.ctx.auth.access_token, {"X-Auth-Project-Id": options.guid, "Accept": "application/json"}, options, "DELETE", resolve, reject)
 	}
     return new Promise(function (resolve, reject) {
 		commons.getData(that, resolve, reject, fn, options)

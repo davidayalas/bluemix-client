@@ -35,6 +35,7 @@ exports.requestWithAuth = function(url, token_type, access_token, extra_headers,
     if(form!==null && form!==undefined && form!=="undefined"){
         options.form = JSON.stringify(form);
         options.headers["Content-Type"] = "application/x-www-form-urlencoded";
+        //options.headers["Content-Type"] = "application/json";
     }
 
     if(extra_headers){
@@ -42,6 +43,5 @@ exports.requestWithAuth = function(url, token_type, access_token, extra_headers,
             options.headers[k] = extra_headers[k];
         }
     }
-    
     return that.request(options)
 }
