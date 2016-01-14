@@ -30,7 +30,7 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 		      
 		      //bluemix.services().get({})
 		      //bluemix.containers().get({})
-		      bluemix.apps().get({space : req.params.space, region : req.params.region, params : req.query})
+		      bluemix.apps().get({space_guid : req.params.space, region : req.params.region, params : req.query})
 		      .then(
 		        function(data){
 		            console.log(data)
@@ -62,45 +62,46 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 * .spaces()
 
 	* .getAll({region, params})
-	* .get({region, params, guid})
+	* .get({region, params, space_guid})
 	* .create({region, form : {organization_guid, name}})
-	* .delete({region, guid})
+	* .delete({region, space_guid})
 
 * .apps()
 
-	* .getAll({region, space, params})
+	* .getAll({region, space_guid, params})
 	* .get({region})
 
 * .services()
 
-	* .getAll({region, space, params})
+	* .getAll({region, space_guid, params})
 
 * .containers()
 
-	* .getAll({region, space})
-	* .get({region, space, container})
-	* .start({container, region, guid}) //guid = space guid
-	* .stop({container, region, guid})
-	* .pause({container, region, guid})
-	* .unpause({container, region, guid})
-	* .restart({container, region, guid})
-	* .delete({container, region, guid})
+	* .getAll({region, space_guid})
+	* .get({region, space_guid, container})
+	* .start({container, region, space_guid}) 
+	* .stop({container, region, space_guid})
+	* .pause({container, region, space_guid})
+	* .unpause({container, region, space_guid})
+	* .restart({container, region, space_guid})
+	* .delete({container, region, space_guid})
 
 * .groups()
 
-	* .getAll({region, space})
-	* .get({region, space, group})
-	* .update(region, space, group, form : {NumberInstances: {Desired, Min, Max}, Autorecovery}) 
+	* .getAll({region, space_guid})
+	* .get({region, space_guid, group})
+	* .delete({region, space_guid, group})
+	* .update(region, space_guid, group, form : {NumberInstances: {Desired, Min, Max}, Autorecovery}) 
 		- http://ccsapi-doc.mybluemix.net/#!/Container_Groups/patch_containers_groups_name_or_id
 
 * .volumes()
 
-	* .getAll({region, space})
+	* .getAll({region, space_guid})
 
 * .logs()
 
-	* .apps({region, space, app})
-	* .containers({region, space, container})
+	* .apps({region, space_guid, app})
+	* .containers({region, space_guid, container})
 
 * .events()
 
@@ -111,7 +112,7 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 * .all()
 
-    * .get({region, space}) : all services, apps and containers for a space
+    * .get({region, space_guid}) : all services, apps and containers for a space
     * .get({region}) : all services, apps and containers for all spaces
 
 

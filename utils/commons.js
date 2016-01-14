@@ -24,22 +24,6 @@ function searchSpace(spaces, _space) {
 }
 
 /**
- * Transform a key,value object into querystring
- * @param  {Object} query
- * @return {String}
- */
-function querify(query) {
-    if (!typeof(query) === "object") {
-        return "";
-    }
-    var stb = [];
-    for (var k in query) {
-        stb.push(k + "=" + query[k]);
-    }
-    return stb.join("&");
-}
-
-/**
  * Cleans data from Bluemix API to simplify it
  * @param  {Object} json
  * @return {Object}
@@ -99,6 +83,7 @@ function cleanResults(json) {
         delete json.resources[i].entity.app_events_url;
         delete json.resources[i].entity.security_groups_url;
     }
+    return json;
 }
 
 /**
@@ -118,6 +103,7 @@ function cleanResultsC(json) {
         delete json[i].SizeRw;
         delete json[i].Started;
     }
+    return json;
 }
 
 /**
@@ -168,7 +154,7 @@ function getData(that, resolve, reject, fn, options) {
  * @param  {Object} extra_headers [for bluemix container API]
  * @return {JSON or text}
  */
-function getUrl(url, that, resolve, reject, options, extra_headers) {
+/*function getUrl(url, that, resolve, reject, options, extra_headers) {
     var results = [];
 
     that.ctx.spaces().getAll(options)
@@ -192,7 +178,7 @@ function getUrl(url, that, resolve, reject, options, extra_headers) {
             }
             var querystring = "";
             if (c_opt.params) {
-                querystring = "?" + querify(c_opt.params);
+                querystring = "?" + http.querify(c_opt.params);
             }
 
             http.requestWithAuth(replaceVariablesInURL(url, c_opt) + querystring, that.ctx.getTokenType(), that.ctx.getToken(), extra_headers)
@@ -221,7 +207,7 @@ function getUrl(url, that, resolve, reject, options, extra_headers) {
     ).catch(function(error) {
         reject(error);
     })
-}
+}*/
 
 /**
  * Wrapper function to make generic requests and resolve promise. The space in options is a guid, not a name
@@ -233,7 +219,7 @@ function getUrl(url, that, resolve, reject, options, extra_headers) {
  * @param  {String} method
  * @return {JSON or text}
  */
-function requestWrapper(url, token_type, access_token, extra_headers, options, method, resolve, reject) {
+/*function requestWrapper(url, token_type, access_token, extra_headers, options, method, resolve, reject) {
     form = options && options.form ? options.form : null;
     http.requestWithAuth(url, token_type, access_token, extra_headers, form, method)
         .then(
@@ -255,12 +241,11 @@ function requestWrapper(url, token_type, access_token, extra_headers, options, m
                 reject(error)
             }
     )
-}
+}*/
 
 exports.getData = getData;
 exports.searchSpace = searchSpace;
-exports.querify = querify
 exports.cleanResults = cleanResults
 exports.cleanResultsC = cleanResultsC
-exports.getUrl = getUrl;
-exports.requestWrapper = requestWrapper;
+//exports.getUrl = getUrl;
+//exports.requestWrapper = requestWrapper;

@@ -6,7 +6,7 @@ function all(context) {
 
 function get(that, resolve, reject, options) {
     var results = {};
-    var space = options.space || null;
+    var space = options.space_guid || null;
 
     that.ctx.spaces().getAll(options)
         .then(
@@ -77,23 +77,23 @@ function get(that, resolve, reject, options) {
 
                 var found = false;
                 for (var i = 0; i < data.resources.length; i++) {
-                    if (space === null || ((space !== null || space !== "") && space === data.resources[i].entity.name)) {
+                    if (space === null || ((space !== null || space !== "") && space === data.resources[i].metadata.guid)) {
                         found = true;
                         results[data.resources[i].entity.name] = {};
                         results[data.resources[i].entity.name].guid = data.resources[i].metadata.guid;
                         spContainers({
-                            space: data.resources[i].entity.name,
+                            space_guid: data.resources[i].metadata.guid,
                             region: options.region
                         }, data.resources[i].entity.name);
                         spApps({
-                            space: data.resources[i].entity.name,
+                            space_guid: data.resources[i].metadata.guid,
                             region: options.region
                         }, data.resources[i].entity.name);
                         spServices({
-                            space: data.resources[i].entity.name,
+                            space_guid: data.resources[i].metadata.guid,
                             region: options.region
                         }, data.resources[i].entity.name);
-                        if ((space !== null || space !== "") && space === data.resources[i].metadata.name) {
+                        if ((space !== null || space !== "") && space === data.resources[i].metadata.guid) {
                             break;
                         }
                     }

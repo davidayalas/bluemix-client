@@ -21,11 +21,6 @@ function cleanLog(data) {
 /*
  * Apps Logs
  */
-function appget(that, resolve, reject, options) {
-    options.apply_fn = cleanLog;
-    commons.getUrl(that.ctx.getLogsEndpoint(options.region) + "/recent?app={{app}}", that, resolve, reject, options)
-}
-
 function apps(context) {
     this.ctx = context;
 }
@@ -36,21 +31,18 @@ logs.prototype.apps = function() {
 
 apps.prototype.get = function(options) {
     var that = this;
+    options.apply_fn = cleanLog;
+    var fn = function(that, resolve, reject, options) {
+        http.requestWithAuth(that.ctx.getLogsEndpoint(options.region) + "/recent?app="+options.app_guid, that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
+    }
     return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, appget, options)
+        commons.getData(that, resolve, reject, fn, options)
     });
 }
 
 /*
  * Container Logs
  */
-function containerget(that, resolve, reject, options) {
-    commons.getUrl(that.ctx.getContainersEndpoint(options.region) + "/containers/{{container}}/logs", that, resolve, reject, options, {
-        "X-Auth-Project-Id": "guid",
-        "Accept": "application/json"
-    })
-}
-
 function containers(context) {
     this.ctx = context;
 }
@@ -61,8 +53,11 @@ logs.prototype.containers = function() {
 
 containers.prototype.get = function(space) {
     var that = this;
+    var fn = function(that, resolve, reject, options) {
+        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/logs", that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
+    }
     return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, containerget, space)
+        commons.getData(that, resolve, reject, fn, options)
     });
 }
 

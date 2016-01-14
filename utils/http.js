@@ -1,5 +1,21 @@
 var request = require('request');
 
+/**
+ * Transform a key,value object into querystring
+ * @param  {Object} query
+ * @return {String}
+ */
+exports.querify = function(query) {
+    if (!typeof(query) === "object") {
+        return "";
+    }
+    var stb = [];
+    for (var k in query) {
+        stb.push(k + "=" + query[k]);
+    }
+    return stb.join("&");
+}
+
 exports.request = function(options) {
     return new Promise(function(resolve, reject) {
         try {
@@ -16,32 +32,55 @@ exports.request = function(options) {
     });
 };
 
-exports.requestWithAuth = function(url, token_type, access_token, extra_headers, form, method) {
+exports.requestWithAuth = function(url, token_type, access_token, opts, method, resolve, reject) {
     var that = this;
 
     if (!method) {
         method = "GET";
     }
 
+    var space_guid = "";
+
+    if(opts && opts.space_guid){
+        space_guid = opts.space_guid;
+    }
+
     var options = {
         method: method,
         url: url,
         headers: {
-            Authorization: token_type + ' ' + access_token,
-            "X-Auth-Token": access_token
+            "Authorization": token_type + ' ' + access_token,
+            "X-Auth-Token": access_token,
+            "X-Auth-Project-Id": space_guid,
+            "Accept": "application/json"
         }
     };
 
-    if (form !== null && form !== undefined && form !== "undefined") {
-        options.form = JSON.stringify(form);
+    if (opts && opts.form) {
+        options.form = JSON.stringify(opts.form);
         options.headers["Content-Type"] = "application/x-www-form-urlencoded";
-        //options.headers["Content-Type"] = "application/json";
     }
 
-    if (extra_headers) {
-        for (var k in extra_headers) {
-            options.headers[k] = extra_headers[k];
-        }
-    }
-    return that.request(options)
+    that.request(options)
+        .then(
+            function(result) {
+                try {
+                    result = JSON.parse(result);
+                } catch (e) {
+                    //... TODO: improve try/catch passing options.json true|false 
+                }
+                if (opts && opts.apply_fn) {
+                    result = opts.apply_fn(result);
+                }
+                resolve(result);
+            }
+    )
+        .catch(
+            function(error) {
+                console.log(error);
+                reject(error);
+            }
+    )
+
+
 }
