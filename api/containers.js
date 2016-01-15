@@ -10,104 +10,57 @@ function containers(context) {
  * GET Space Containers
  */
 containers.prototype.getAll = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/json", that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/json", this, options);
 }
 
 /* 
  * GET Container Summary
  */
 containers.prototype.get = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/json", that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/json", this, options);
 }
 
 /* 
  * POST Start Container
  */
 containers.prototype.start = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/start", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "POST", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/start", this, options, "POST");
 }
 
 /* 
  * POST Stop Container
  */
 containers.prototype.stop = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "POST", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", this, options, "POST");
 }
 
 /* 
  * POST Restart Container
  */
 containers.prototype.restart = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/restart", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "POST", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/restart", this, options, "POST");
 }
 
 /* 
  * POST Pause Container
  */
 containers.prototype.pause = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/pause", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "POST", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/pause", this, options, "POST");
 }
 
 /* 
  * POST Unpause Container
  */
 containers.prototype.unpause = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/unpause", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "POST", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/unpause", this, options, "POST");
+
 }
 
 /* 
  * DELETE Remove Container
  */
 containers.prototype.delete = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/pause", that.ctx.auth.token_type, that.ctx.auth.access_token, options, "DELETE", resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/delete", this, options, "DELETE");
 }
 
 module.exports = containers;

@@ -30,14 +30,8 @@ logs.prototype.apps = function() {
 }
 
 apps.prototype.get = function(options) {
-    var that = this;
     options.apply_fn = cleanLog;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getLogsEndpoint(options.region) + "/recent?app="+options.app_guid, that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/recent?app="+options.app_guid, this, options);
 }
 
 /*
@@ -52,13 +46,7 @@ logs.prototype.containers = function() {
 }
 
 containers.prototype.get = function(space) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/logs", that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/logs", this, options);
 }
 
 module.exports = logs;

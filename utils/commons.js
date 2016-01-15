@@ -243,9 +243,28 @@ function getData(that, resolve, reject, fn, options) {
     )
 }*/
 
+/**
+ * Wrapper function to make generic requests
+ * @param  {String} url
+ * @param  {String} token_type
+ * @param  {Object} that //for accessing parent context
+ * @param  {String} http method 
+ * @return {JSON or text}
+ */
+function requestWrapper(url, that, options, method) {
+    console.log(url)
+    var fn = function(that, resolve, reject, options) {
+        http.requestWithAuth(url, that.ctx.auth.token_type, that.ctx.auth.access_token, options, method, resolve, reject)
+    }
+    return new Promise(function(resolve, reject) {
+        getData(that, resolve, reject, fn, options)
+    });
+}
+
+
 exports.getData = getData;
 exports.searchSpace = searchSpace;
 exports.cleanResults = cleanResults
 exports.cleanResultsC = cleanResultsC
 //exports.getUrl = getUrl;
-//exports.requestWrapper = requestWrapper;
+exports.requestWrapper = requestWrapper;

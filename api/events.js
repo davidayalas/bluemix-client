@@ -21,13 +21,7 @@ function apps(context) {
 }
 
 apps.prototype.get = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getEndpoint(options.region) + "/v2/events?q=type:audit.app." + options.type, that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/v2/events?q=type:audit.app." + options.type, this, options);
 }
 
 /*
@@ -38,13 +32,7 @@ function services(context) {
 }
 
 services.prototype.get = function(options) {
-    var that = this;
-    var fn = function(that, resolve, reject, options) {
-        http.requestWithAuth(that.ctx.getEndpoint(options.region) + "/v2/events?q=type:audit.service_instance." + options.type, that.ctx.auth.token_type, that.ctx.auth.access_token, options, null, resolve, reject);
-    }
-    return new Promise(function(resolve, reject) {
-        commons.getData(that, resolve, reject, fn, options)
-    });
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/v2/events?q=type:audit.service_instance." + options.type, this, options);
 }
 
 module.exports = events;
