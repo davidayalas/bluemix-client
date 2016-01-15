@@ -117,4 +117,6 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 
 
-# TODO: implement more services and methods
+# TODO:
+- implement more services and methods
+- add organization_guid as filter

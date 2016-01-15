@@ -145,105 +145,6 @@ function getData(that, resolve, reject, fn, options) {
 }
 
 /**
- * Wrapper function to make generic the "GET" of url from Bluemix API. It accepts name of space in options
- * @param  {String} url
- * @param  {Object} that   [Bluemix instance]
- * @param  {Function} resolve
- * @param  {Function} reject
- * @param  {Object} options
- * @param  {Object} extra_headers [for bluemix container API]
- * @return {JSON or text}
- */
-/*function getUrl(url, that, resolve, reject, options, extra_headers) {
-    var results = [];
-
-    that.ctx.spaces().getAll(options)
-
-    .then(
-        function(spaces) {
-            var c_opt = options;
-            c_opt.space = searchSpace(spaces, c_opt.space);
-            return c_opt;
-        }
-    )
-
-    .then(
-        function(c_opt) {
-            if (c_opt.space && c_opt.space.error) {
-                reject(c_opt.space);
-            }
-
-            if (extra_headers && extra_headers["X-Auth-Project-Id"]) { //containers API
-                extra_headers["X-Auth-Project-Id"] = c_opt.space;
-            }
-            var querystring = "";
-            if (c_opt.params) {
-                querystring = "?" + http.querify(c_opt.params);
-            }
-
-            http.requestWithAuth(replaceVariablesInURL(url, c_opt) + querystring, that.ctx.getTokenType(), that.ctx.getToken(), extra_headers)
-
-            .then(function(results) {
-                try {
-                    results = JSON.parse(results);
-                    if (extra_headers && extra_headers["X-Auth-Project-Id"]) { //containers API
-                        cleanResultsC(results);
-                    } else {
-                        cleanResults(results);
-                    }
-                } catch (e) {
-                    //... TODO: improve try/catch passing options.json true|false 
-                }
-                if (options.apply_fn) {
-                    results = options.apply_fn(results);
-                }
-                resolve(results);
-            })
-
-            .catch(function(error) {
-                reject(error);
-            });
-        }
-    ).catch(function(error) {
-        reject(error);
-    })
-}*/
-
-/**
- * Wrapper function to make generic requests and resolve promise. The space in options is a guid, not a name
- * @param  {String} url
- * @param  {String} token_type
- * @param  {String} access_token
- * @param  {Object} extra_headers
- * @param  {Object} options
- * @param  {String} method
- * @return {JSON or text}
- */
-/*function requestWrapper(url, token_type, access_token, extra_headers, options, method, resolve, reject) {
-    form = options && options.form ? options.form : null;
-    http.requestWithAuth(url, token_type, access_token, extra_headers, form, method)
-        .then(
-            function(result) {
-                try {
-                    result = JSON.parse(result);
-                } catch (e) {
-                    //... TODO: improve try/catch passing options.json true|false 
-                }
-                if (options && options.apply_fn) {
-                    result = options.apply_fn(result);
-                }
-                resolve(result);
-            }
-    )
-        .catch(
-            function(error) {
-                console.log(error)
-                reject(error)
-            }
-    )
-}*/
-
-/**
  * Wrapper function to make generic requests
  * @param  {String} url
  * @param  {String} token_type
@@ -266,5 +167,4 @@ exports.getData = getData;
 exports.searchSpace = searchSpace;
 exports.cleanResults = cleanResults
 exports.cleanResultsC = cleanResultsC
-//exports.getUrl = getUrl;
 exports.requestWrapper = requestWrapper;
