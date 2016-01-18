@@ -6,7 +6,7 @@ function logs(context) {
 }
 
 function cleanLog(data) {
-    if(!data){
+    if (!data) {
         return data;
     }
     data = data.split('\n\n');
@@ -34,7 +34,7 @@ logs.prototype.apps = function() {
 
 apps.prototype.get = function(options) {
     options.apply_fn = cleanLog;
-    return commons.requestWrapper(this.ctx.getLogsEndpoint(options.region) + "/recent?app="+options.app_guid, this, options);
+    return commons.requestWrapper(this.ctx.getLogsEndpoint(options.region) + "/recent?app=" + options.app_guid, this, options);
 }
 
 /*
@@ -49,7 +49,7 @@ logs.prototype.containers = function() {
 }
 
 containers.prototype.get = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/logs", this, options);
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/logs", this, options);
 }
 
 module.exports = logs;

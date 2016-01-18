@@ -11,15 +11,15 @@ spaces.prototype.getAll = function(options) {
 }
 
 spaces.prototype.get = function(options) {
-    return commons.requestWrapper(this.ctx.getEndpoint(options.region)  + "/v2/spaces/" + options.space_guid + "/summary", this, options);
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/v2/spaces/" + options.space_guid + "/summary", this, options);
 }
 
 spaces.prototype.create = function(options) {
-    return commons.requestWrapper(this.ctx.getEndpoint(options.region)  + "/v2/spaces", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/v2/spaces", this, options, "POST");
 }
 
 spaces.prototype.delete = function(options) {
-    return commons.requestWrapper(this.ctx.getEndpoint(options.region)  + "/v2/spaces/" + options.space_guid, this, options, "DELETE");
+    return commons.requestWrapper(this.ctx.getEndpoint(options.region) + "/v2/spaces/" + options.space_guid, this, options, "DELETE");
 }
 
 

@@ -17,42 +17,42 @@ containers.prototype.getAll = function(options) {
  * GET Container Summary
  */
 containers.prototype.get = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/json", this, options);
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/json", this, options);
 }
 
 /* 
  * POST Start Container
  */
 containers.prototype.start = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/start", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/start", this, options, "POST");
 }
 
 /* 
  * POST Stop Container
  */
 containers.prototype.stop = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/stop", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/stop", this, options, "POST");
 }
 
 /* 
  * POST Restart Container
  */
 containers.prototype.restart = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/restart", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/restart", this, options, "POST");
 }
 
 /* 
  * POST Pause Container
  */
 containers.prototype.pause = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/pause", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/pause", this, options, "POST");
 }
 
 /* 
  * POST Unpause Container
  */
 containers.prototype.unpause = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/unpause", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/unpause", this, options, "POST");
 
 }
 
@@ -60,7 +60,7 @@ containers.prototype.unpause = function(options) {
  * DELETE Remove Container
  */
 containers.prototype.delete = function(options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/"+options.container+"/delete", this, options, "DELETE");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/delete", this, options, "DELETE");
 }
 
 module.exports = containers;

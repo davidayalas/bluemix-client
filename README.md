@@ -61,10 +61,12 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 * .spaces()
 
-	* .getAll({region, params})
-	* .get({region, params, space_guid})
+	* .getAll({region[, organization_guid][, params : {param:value}]})
+	* .get({region, space_guid[, params : {param:value}]})
 	* .create({region, form : {organization_guid, name}})
 	* .delete({region, space_guid})
+
+	Valid params: name, developer_guid, app_guid
 
 * .apps()
 

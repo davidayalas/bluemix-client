@@ -5,13 +5,13 @@ var request = require('request');
  * @param  {Object} query
  * @return {String}
  */
-exports.querify = function(query) {
+function querify(query) {
     if (!typeof(query) === "object") {
         return "";
     }
     var stb = [];
     for (var k in query) {
-        stb.push(k + "=" + query[k]);
+        stb.push("q=" + k + ":" + query[k]);
     }
     return stb.join("&");
 }
@@ -41,9 +41,25 @@ exports.requestWithAuth = function(url, token_type, access_token, opts, method, 
 
     var space_guid = "";
 
-    if(opts && opts.space_guid){
+    if (opts && opts.space_guid) {
         space_guid = opts.space_guid;
     }
+
+    if (opts && opts.organization_guid) {
+        if (!opts.params) {
+            opts.params = {};
+        }
+        opts.params.organization_guid = opts.organization_guid;
+    }
+
+    var querystring = "";
+
+    if (opts.params) {
+        querystring = querify(opts.params);
+    }
+
+    url = url.indexOf("?") > -1 ? url + "&" : url + "?";
+    url = url + querystring;
 
     var options = {
         method: method,
