@@ -11,7 +11,7 @@ function querify(query) {
     }
     var stb = [];
     for (var k in query) {
-        stb.push("q=" + k + ":" + query[k]);
+        stb.push(k + "=" + query[k]);
     }
     return stb.join("&");
 }
@@ -49,7 +49,7 @@ exports.requestWithAuth = function(url, token_type, access_token, opts, method, 
         if (!opts.params) {
             opts.params = {};
         }
-        opts.params.organization_guid = opts.organization_guid;
+        opts.params.q = "organization_guid:" + opts.organization_guid;
     }
 
     var querystring = "";
