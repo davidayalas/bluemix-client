@@ -100,6 +100,13 @@ Also, I need access to Container API and the cf client doesn't provide it, for n
 
 	* .getAll({region, space_guid})
 
+* .images()
+
+	* .getAll({region, space_guid})
+	* .get({region, space_guid, image})
+	* .validate({region, space_guid, image, name}) // image or name. image = id, name = full path name of the image, including registry and namespace. 
+	* .delete({region, space_guid, image})
+
 * .logs()
 
 	* .apps({region, space_guid, app})

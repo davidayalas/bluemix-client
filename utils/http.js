@@ -61,6 +61,10 @@ exports.requestWithAuth = function(url, token_type, access_token, opts, method, 
     url = url.indexOf("?") > -1 ? url + "&" : url + "?";
     url = url + querystring;
 
+    if (url.slice(url.length - 1) === "&") {
+        url = url.slice(0, url.length - 1);
+    }
+
     var options = {
         method: method,
         url: url,
@@ -73,10 +77,15 @@ exports.requestWithAuth = function(url, token_type, access_token, opts, method, 
     };
 
     if (opts && opts.form) {
-        options.form = JSON.stringify(opts.form);
-        options.headers["Content-Type"] = "application/x-www-form-urlencoded";
+        if(options.url.indexOf("containers-api.")>-1){
+            options.headers["Content-Type"] = "application/json";
+            options.body = JSON.stringify(opts.form);
+        }else{
+            options.form = JSON.stringify(opts.form);
+            options.headers["Content-Type"] = "application/x-www-form-urlencoded";
+        }
     }
-
+console.log(options)
     that.request(options)
         .then(
             function(result) {

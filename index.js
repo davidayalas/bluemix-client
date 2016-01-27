@@ -164,25 +164,6 @@ Bluemix.prototype.apps = function() {
 }
 
 /**
- * Exposes .containers() method to bind containers functionality
- */
-Bluemix.prototype.containers = function() {
-    var containers = require("./api/containers");
-    containers = new containers(this);
-    return containers;
-}
-
-
-/**
- * Exposes .groups() method to bind groups containers functionality
- */
-Bluemix.prototype.groups = function() {
-    var groups = require("./api/containers-group");
-    groups = new groups(this);
-    return groups;
-}
-
-/**
  * Exposes .all() method to bind general functionality
  */
 Bluemix.prototype.all = function() {
@@ -210,6 +191,25 @@ Bluemix.prototype.events = function() {
 }
 
 /**
+ * Exposes .containers() method to bind containers functionality
+ */
+Bluemix.prototype.containers = function() {
+    var containers = require("./api/containers");
+    containers = new containers(this);
+    return containers;
+}
+
+
+/**
+ * Exposes .groups() method to bind groups containers functionality
+ */
+Bluemix.prototype.groups = function() {
+    var groups = require("./api/containers-group");
+    groups = new groups(this);
+    return groups;
+}
+
+/**
  * Exposes .volumes() method to bind events functionality
  */
 Bluemix.prototype.volumes = function() {
@@ -217,6 +217,16 @@ Bluemix.prototype.volumes = function() {
     volumes = new volumes(this);
     return volumes;
 }
+
+/**
+ * Exposes .images() method to bind events functionality
+ */
+Bluemix.prototype.images = function() {
+    var images = require("./api/images");
+    images = new images(this);
+    return images;
+}
+
 
 /**
  * Exposes .organizations() method to bind events functionality
