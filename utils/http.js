@@ -77,15 +77,15 @@ exports.requestWithAuth = function(url, token_type, access_token, opts, method, 
     };
 
     if (opts && opts.form) {
-        if(options.url.indexOf("containers-api.")>-1){
+        if (options.url.indexOf("containers-api.") > -1) {
             options.headers["Content-Type"] = "application/json";
             options.body = JSON.stringify(opts.form);
-        }else{
+        } else {
             options.form = JSON.stringify(opts.form);
             options.headers["Content-Type"] = "application/x-www-form-urlencoded";
         }
     }
-console.log(options)
+
     that.request(options)
         .then(
             function(result) {
