@@ -155,6 +155,15 @@ Bluemix.prototype.publicIP = function() {
 }
 
 /**
+ * Exposes .quota() method to bind quota functionality
+ */
+Bluemix.prototype.quota = function() {
+    var quota = require("./api/quota");
+    quota = new quota(this);
+    return quota;
+}
+
+/**
  * Exposes .spaces() method to bind spaces functionality
  */
 Bluemix.prototype.services = function() {
