@@ -146,6 +146,15 @@ Bluemix.prototype.spaces = function() {
 }
 
 /**
+ * Exposes .publicIP() method to bind public IP addresses functionality
+ */
+Bluemix.prototype.publicIP = function() {
+    var publicIP = require("./api/public-ip");
+    publicIP = new publicIP(this);
+    return publicIP;
+}
+
+/**
  * Exposes .spaces() method to bind spaces functionality
  */
 Bluemix.prototype.services = function() {
