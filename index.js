@@ -146,6 +146,15 @@ Bluemix.prototype.spaces = function() {
 }
 
 /**
+ * Exposes .nameSpaces() method to bind nameSpaces functionality
+ */
+Bluemix.prototype.nameSpaces = function() {
+    var nameSpaces = require("./api/name-spaces");
+    nameSpaces = new nameSpaces(this);
+    return nameSpaces;
+}
+
+/**
  * Exposes .publicIP() method to bind public IP addresses functionality
  */
 Bluemix.prototype.publicIP = function() {
