@@ -17,14 +17,14 @@ publicIP.prototype.getAll = function (options) {
  * POST - Bind a public IP address to a single container
  */
 publicIP.prototype.bind = function (options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/floating-ips/" + options.ip + "/bind/", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/floating-ips/" + options.ip + "/bind", this, options, "POST");
 }
 
 /* 
  * POST - Unbind a public IP address from a container
  */
 publicIP.prototype.unbind = function (options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/floating-ips/" + options.ip + "/unbind/", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/" + options.container + "/floating-ips/" + options.ip + "/unbind", this, options, "POST");
 }
 
 /* 
@@ -38,7 +38,7 @@ publicIP.prototype.request = function (options) {
  * POST - Release public IP address
  */
 publicIP.prototype.release = function (options) {
-    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/floating-ips/" + options.ip + "/release/", this, options, "POST");
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/floating-ips/" + options.ip + "/release", this, options, "POST");
 }
 
 module.exports = publicIP;
