@@ -146,6 +146,33 @@ Bluemix.prototype.spaces = function() {
 }
 
 /**
+ * Exposes .nameSpaces() method to bind nameSpaces functionality
+ */
+Bluemix.prototype.nameSpaces = function() {
+    var nameSpaces = require("./api/name-spaces");
+    nameSpaces = new nameSpaces(this);
+    return nameSpaces;
+}
+
+/**
+ * Exposes .publicIP() method to bind public IP addresses functionality
+ */
+Bluemix.prototype.publicIP = function() {
+    var publicIP = require("./api/public-ip");
+    publicIP = new publicIP(this);
+    return publicIP;
+}
+
+/**
+ * Exposes .quota() method to bind quota functionality
+ */
+Bluemix.prototype.quota = function() {
+    var quota = require("./api/quota");
+    quota = new quota(this);
+    return quota;
+}
+
+/**
  * Exposes .spaces() method to bind spaces functionality
  */
 Bluemix.prototype.services = function() {

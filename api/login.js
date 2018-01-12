@@ -66,7 +66,8 @@ exports.getInfo = function() {
         })
             .then(function(data) {
                 that.info = JSON.parse(data);
-                that.logs_endpoint = that.info.logging_endpoint.replace("wss", "https").replace(":443", "").replace("\.ng\.", ".{{region}}.");
+                var logging_endpoint = that.info.logging_endpoint || that.info.doppler_logging_endpoint;
+                that.logs_endpoint = logging_endpoint.replace("wss", "https").replace(":443", "").replace("\.ng\.", ".{{region}}.");
                 resolve(data);
             })
             .catch(function(error) {

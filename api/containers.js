@@ -21,6 +21,13 @@ containers.prototype.get = function(options) {
 }
 
 /* 
+ * POST Stop Container
+ */
+containers.prototype.create = function(options) {
+    return commons.requestWrapper(this.ctx.getContainersEndpoint(options.region) + "/containers/create", this, options, "POST");
+}
+
+/* 
  * POST Start Container
  */
 containers.prototype.start = function(options) {
